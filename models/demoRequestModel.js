@@ -11,6 +11,14 @@ const DemoRequest = {
     return rows[0];
   },
 
+  async findByEmail(email) {
+    const { rows } = await pool.query(
+      `SELECT id FROM demo_requests WHERE email = $1 LIMIT 1`,
+      [email]
+    );
+    return rows[0] || null;
+  },
+
   async findById(id) {
     const { rows } = await pool.query(
       `SELECT id, company, full_name, email, phone, firm_size, message, status, created_at

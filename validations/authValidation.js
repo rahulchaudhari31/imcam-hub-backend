@@ -11,9 +11,6 @@ export const registerValidation = [
     .trim()
     .notEmpty().withMessage('Full name is required.')
     .isLength({ max: 100 }).withMessage('Full name must be 100 characters or fewer.'),
-  body('role')
-    .optional()
-    .isIn(['admin', 'caseworker', 'candidate', 'client']).withMessage('Invalid role.'),
 ];
 
 export const loginValidation = [

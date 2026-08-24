@@ -1,4 +1,8 @@
 const errorHandler = (err, req, res, _next) => {
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json({ message: 'Request blocked by CORS policy.' });
+  }
+
   console.error('Unhandled error:', err);
 
   if (err.code === '23505') {

@@ -17,7 +17,7 @@ export const register = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: errors.array()[0].msg });
   }
 
-  const { email, password, fullName, role } = req.body;
+  const { email, password, fullName } = req.body;
 
   const existing = await User.findByEmail(email);
   if (existing) {
@@ -31,7 +31,7 @@ export const register = asyncHandler(async (req, res) => {
     email,
     password: passwordHash,
     fullName,
-    role: role || 'user',
+    role: 'client',
   });
 
   const token = generateToken(user.id, user.role);

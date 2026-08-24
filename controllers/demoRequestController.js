@@ -11,6 +11,11 @@ export const createDemoRequest = asyncHandler(async (req, res) => {
 
   const { company, fullName, email, phone, firmSize, message } = req.body;
 
+  const existing = await DemoRequest.findByEmail(email);
+  if (existing) {
+    return res.status(409).json({ message: 'A demo request with this email already exists.' });
+  }
+
   const demoRequest = await DemoRequest.create({
     company,
     fullName,
@@ -25,8 +30,12 @@ export const createDemoRequest = asyncHandler(async (req, res) => {
 
 // GET /api/demo-requests
 export const listDemoRequests = asyncHandler(async (req, res) => {
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = Math.min(parseInt(req.query.limit, 10) || 20, 100);
+  const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+  const rawLimit = parseInt(req.query.limit, 10);
+  if (!Number.isNaN(rawLimit) && rawLimit < 0) {
+    return res.status(400).json({ message: 'Limit must be greater than 0.' });
+  }
+  const limit = Math.min(rawLimit || 20, 100);
   const status = req.query.status || undefined;
 
   if (status && !['new', 'contacted', 'scheduled', 'closed'].includes(status)) {
