@@ -5,6 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import authRoutes from './routes/authRoutes.js';
 import demoRequestRoutes from './routes/demoRequestRoutes.js';
+import caseRoutes from './routes/caseRoutes.js';
+import documentRoutes from './routes/documentRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
 import websiteSettingsRoutes from './routes/websiteSettingsRoutes.js';
 import homeContentRoutes from './routes/homeContentRoutes.js';
@@ -17,6 +19,8 @@ import socialLinkRoutes from './routes/socialLinkRoutes.js';
 import mediaRoutes from './routes/mediaRoutes.js';
 import seoSettingsRoutes from './routes/seoSettingsRoutes.js';
 import adminUserRoutes from './routes/adminUserRoutes.js';
+import caseworkerRoutes from './routes/caseworkerRoutes.js';
+import clientRoutes from './routes/clientRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import { testConnection } from './config/db.js';
 
@@ -71,6 +75,14 @@ app.use(
 // --- Body parsing ---
 app.use(express.json({ limit: '10mb' }));
 
+// Handle JSON parsing errors
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({ message: 'Invalid JSON format.' });
+  }
+  next(err);
+});
+
 // --- Static files ---
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -82,8 +94,12 @@ app.get('/api/health', (_req, res) => {
 // --- Routes ---
 app.use('/api/auth', authRoutes);
 app.use('/api/demo-requests', demoRequestRoutes);
+app.use('/api/cases', caseRoutes);
+app.use('/api', documentRoutes);
 app.use('/api/admin/dashboard', dashboardRoutes);
 app.use('/api/admin/users', adminUserRoutes);
+app.use('/api/caseworker', caseworkerRoutes);
+app.use('/api/client', clientRoutes);
 app.use('/api/cms/settings', websiteSettingsRoutes);
 app.use('/api/cms/home', homeContentRoutes);
 app.use('/api/cms/about', aboutContentRoutes);

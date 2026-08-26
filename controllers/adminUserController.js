@@ -62,6 +62,11 @@ export const updateUser = asyncHandler(async (req, res) => {
   const { fullName, email, role } = req.body;
   const { id } = req.params;
 
+  const validRoles = ['admin', 'caseworker', 'candidate', 'client'];
+  if (role && !validRoles.includes(role)) {
+    return res.status(400).json({ message: 'Invalid role.' });
+  }
+
   const { rows: existing } = await pool.query('SELECT id, role FROM users WHERE id = $1', [id]);
   if (!existing[0]) {
     return res.status(404).json({ message: 'User not found.' });
@@ -73,6 +78,9 @@ export const updateUser = asyncHandler(async (req, res) => {
     );
     if (existing[0].role === 'admin' && parseInt(adminCount.rows[0].count, 10) <= 1) {
       return res.status(400).json({ message: 'Cannot change the role of the last admin account.' });
+    }
+    if (req.user && String(req.user.id) === String(id) && existing[0].role === 'admin') {
+      return res.status(400).json({ message: 'Cannot change your own admin role.' });
     }
   }
 
