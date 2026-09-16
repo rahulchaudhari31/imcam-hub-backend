@@ -17,21 +17,31 @@ const storage = multer.diskStorage({
   },
 });
 
+const allowedMimes = [
+  'application/pdf',
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/gif',
+  'image/webp',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'text/plain',
+];
+
+const allowedExtensions = new Set([
+  '.pdf', '.jpg', '.jpeg', '.png', '.gif', '.webp',
+  '.doc', '.docx', '.xls', '.xlsx', '.txt',
+]);
+
 const fileFilter = (_req, file, cb) => {
-  const allowed = [
-    'application/pdf',
-    'image/jpeg',
-    'image/jpg',
-    'image/png',
-    'image/gif',
-    'image/webp',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/vnd.ms-excel',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    'text/plain',
-  ];
-  if (allowed.includes(file.mimetype)) {
+  const ext = path.extname(file.originalname || '').toLowerCase();
+  if (
+    allowedMimes.includes(file.mimetype) &&
+    allowedExtensions.has(ext)
+  ) {
     cb(null, true);
   } else {
     cb(new Error('File type not allowed.'), false);

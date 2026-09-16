@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import helmet from 'helmet';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -21,6 +22,13 @@ import seoSettingsRoutes from './routes/seoSettingsRoutes.js';
 import adminUserRoutes from './routes/adminUserRoutes.js';
 import caseworkerRoutes from './routes/caseworkerRoutes.js';
 import clientRoutes from './routes/clientRoutes.js';
+import navigationRoutes from './routes/navigationRoutes.js';
+import featurePageRoutes from './routes/featurePageRoutes.js';
+import solutionsRoutes from './routes/solutionsRoutes.js';
+import pricingRoutes from './routes/pricingRoutes.js';
+import resourceRoutes from './routes/resourceRoutes.js';
+import bookDemoRoutes from './routes/bookDemoRoutes.js';
+import footerLinkRoutes from './routes/footerLinkRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import { testConnection } from './config/db.js';
 
@@ -29,6 +37,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// --- Security headers (API responses; CMS/media still served normally) ---
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
 // --- CORS ---
 const isDev = process.env.NODE_ENV !== 'production';
@@ -92,6 +104,14 @@ app.get('/api/health', (_req, res) => {
 });
 
 // --- Routes ---
+// Prevent caching on CMS API responses so content changes show immediately
+app.use('/api/cms', (_req, res, next) => {
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/demo-requests', demoRequestRoutes);
 app.use('/api/cases', caseRoutes);
@@ -110,6 +130,13 @@ app.use('/api/cms/contact', contactInfoRoutes);
 app.use('/api/cms/social-links', socialLinkRoutes);
 app.use('/api/cms/media', mediaRoutes);
 app.use('/api/cms/seo', seoSettingsRoutes);
+app.use('/api/cms/navigation', navigationRoutes);
+app.use('/api/cms/features', featurePageRoutes);
+app.use('/api/cms/solutions', solutionsRoutes);
+app.use('/api/cms/pricing', pricingRoutes);
+app.use('/api/cms/resources', resourceRoutes);
+app.use('/api/cms/book-demo', bookDemoRoutes);
+app.use('/api/cms/footer-links', footerLinkRoutes);
 
 // --- 404 catch-all ---
 app.use((_req, res) => {
