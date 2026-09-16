@@ -39,7 +39,7 @@ INSERT INTO home_content (section_key, title, content, display_order) VALUES
 ('trusted_features', 'Trusted Features',
   '[
    {"title": "Role-Based Access", "description": "Every user sees only the cases and data relevant to their role."},
-   {"title": "Real-Time Visibility", "description": "Live dashboards track every case, deadline, and caseworker\'s progress instantly."},
+   {"title": "Real-Time Visibility", "description": "Live dashboards track every case, deadline, and caseworker''s progress instantly."},
    {"title": "Four Connected Portals", "description": "Admin, caseworker, client, and business, all sharing one live case."},
    {"title": "AI-Powered Case Intelligence", "description": "Auto-checks documents, flags compliance risks, and predicts delays early."}
  ]', 3)
@@ -52,7 +52,7 @@ INSERT INTO home_content (section_key, title, description, content, display_orde
 ('ai_agents', 'Intelligent System', 'Our AI-powered agents handle routine tasks so your team can focus on what matters.',
   '[
    {"title": "Case & Workflow Management", "description": "Track every case through enquiry, application, compliance, and completion with pre-built workflows for each UK visa type.", "badges": ["FULL LIFECYCLE", "PRE-BUILT WORKFLOWS"], "icon": "Workflow"},
-   {"title": "Document Vault", "description": "Store, organise, and retrieve every case document securely in one place, with checklists showing what\'s received and outstanding.", "badges": ["SECURE STORAGE", "CHECKLIST TRACKING"], "icon": "FileCheck"},
+   {"title": "Document Vault", "description": "Store, organise, and retrieve every case document securely in one place, with checklists showing what''s received and outstanding.", "badges": ["SECURE STORAGE", "CHECKLIST TRACKING"], "icon": "FileCheck"},
    {"title": "Caseworker & Task Assignment", "description": "Assign cases and tasks to caseworkers, then monitor workload and progress from a single manager dashboard.", "badges": ["TASK ASSIGNMENT", "WORKLOAD VISIBILITY"], "icon": "Users"},
    {"title": "Compliance & Licence Tracking", "description": "Manage licence requests, CoS allocation, and compliance reviews with automatic alerts before deadlines are at risk.", "badges": ["LICENCE TRACKING", "AUTO ALERTS"], "icon": "Shield"},
    {"title": "Client Self-Service Portal", "description": "Let individual clients track their application progress, upload documents, and message your team without needing to call or email.", "badges": ["CLIENT PORTAL", "SELF-SERVICE"], "icon": "UserCheck"},
