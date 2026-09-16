@@ -3,7 +3,8 @@ import asyncHandler from '../utils/asyncHandler.js';
 
 export const getAllFaqs = asyncHandler(async (req, res) => {
   const activeOnly = req.query.active === 'true';
-  const faqs = await Faq.findAll({ activeOnly });
+  const pageKey = req.query.page_key || undefined;
+  const faqs = await Faq.findAll({ activeOnly, pageKey });
   res.json({ data: faqs });
 });
 

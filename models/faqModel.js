@@ -1,10 +1,21 @@
 import pool from '../config/db.js';
 
 const Faq = {
-  async findAll({ activeOnly = false } = {}) {
-    const where = activeOnly ? 'WHERE is_active = TRUE' : '';
+  async findAll({ activeOnly = false, pageKey } = {}) {
+    const conditions = [];
+    const params = [];
+    if (activeOnly) {
+      params.push(true);
+      conditions.push(`is_active = $${params.length}`);
+    }
+    if (pageKey) {
+      params.push(pageKey);
+      conditions.push(`page_key = $${params.length}`);
+    }
+    const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
     const { rows } = await pool.query(
-      `SELECT * FROM faqs ${where} ORDER BY display_order ASC, created_at ASC`
+      `SELECT * FROM faqs ${where} ORDER BY display_order ASC, created_at ASC`,
+      params
     );
     return rows;
   },

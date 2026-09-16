@@ -8,8 +8,7 @@
 INSERT INTO website_settings (setting_key, setting_value) VALUES
 ('site_name', 'ImCam Hub'),
 ('site_tagline', 'Immigration Case Management'),
-('site_description', 'One Platform. Every Case, Handled.'),
-('logo_url', '/assets/imcam-hub-logo.png'),
+('site_description', 'One Platform. Every Case, Handled.'),('logo_url', '/assets/imcam-hub-logo.png'),
 ('favicon_url', '/favicon.svg')
 ON CONFLICT (setting_key) DO NOTHING;
 
@@ -17,7 +16,7 @@ ON CONFLICT (setting_key) DO NOTHING;
 -- Home Content: Hero
 -- ============================================================
 INSERT INTO home_content (section_key, title, description, button_text, button_link, secondaryButtonText, secondaryButtonLink, content, display_order) VALUES
-('hero', 'One Platform. Every Case, Handled.', 'The all-in-one immigration case management platform that brings order to complexity. Manage cases, documents, deadlines, and client communication from a single dashboard.', 'Book a Free Demo', '/book-demo', 'Watch Demo', '#video-showcase',
+('hero', 'The Complete Case Management Platform for UK Immigration Consultancies', 'Manage Skilled Worker visas, Sponsor Licences, ILR, and British Citizenship cases — from first enquiry to final approval, in one connected platform.', 'Book a Free Demo', '/book-demo', 'Watch Demo', '#video-showcase',
  '{"tagline": "Immigration Case Management Platform"}', 1)
 ON CONFLICT (section_key) DO NOTHING;
 
@@ -27,7 +26,6 @@ ON CONFLICT (section_key) DO NOTHING;
 INSERT INTO home_content (section_key, title, content, display_order) VALUES
 ('stats', 'Platform Statistics',
  '[
-   {"label": "Cases Managed", "value": "10,000+"},
    {"label": "Faster Processing", "value": "60%"},
    {"label": "Client Satisfaction", "value": "98%"},
    {"label": "Compliance Rate", "value": "100%"}
@@ -39,11 +37,11 @@ ON CONFLICT (section_key) DO NOTHING;
 -- ============================================================
 INSERT INTO home_content (section_key, title, content, display_order) VALUES
 ('trusted_features', 'Trusted Features',
- '[
-   {"title": "Role-Based Access", "description": "Secure, role-based dashboards for every user type."},
-   {"title": "Automated Case Flows", "description": "Streamlined workflows that reduce manual tasks."},
-   {"title": "Real-Time Visibility", "description": "Track every case, deadline, and document in real time."},
-   {"title": "Bank-Grade Security", "description": "Enterprise encryption and compliance built in."}
+  '[
+   {"title": "Role-Based Access", "description": "Every user sees only the cases and data relevant to their role."},
+   {"title": "Real-Time Visibility", "description": "Live dashboards track every case, deadline, and caseworker\'s progress instantly."},
+   {"title": "Four Connected Portals", "description": "Admin, caseworker, client, and business, all sharing one live case."},
+   {"title": "AI-Powered Case Intelligence", "description": "Auto-checks documents, flags compliance risks, and predicts delays early."}
  ]', 3)
 ON CONFLICT (section_key) DO NOTHING;
 
@@ -52,13 +50,13 @@ ON CONFLICT (section_key) DO NOTHING;
 -- ============================================================
 INSERT INTO home_content (section_key, title, description, content, display_order) VALUES
 ('ai_agents', 'Intelligent System', 'Our AI-powered agents handle routine tasks so your team can focus on what matters.',
- '[
-   {"title": "Client Intake", "description": "Automated client onboarding and data collection.", "badge": "AUTO ONBOARD", "icon": "UserPlus"},
-   {"title": "Document Verification", "description": "AI-powered document scanning and validation.", "badge": "OCR POWERED", "icon": "FileCheck"},
-   {"title": "Email Reply", "description": "Smart email drafting and response suggestions.", "badge": "AI DRAFT", "icon": "Mail"},
-   {"title": "Clause & Document Analysis", "description": "Automated clause extraction and compliance checking.", "badge": "NLP POWERED", "icon": "Search"},
-   {"title": "Invoice & Communication", "description": "Integrated billing and client messaging.", "badge": "AUTOMATED", "icon": "Receipt"},
-   {"title": "Compliance Monitor", "description": "Real-time regulatory compliance monitoring.", "badge": "ALWAYS ON", "icon": "Shield"}
+  '[
+   {"title": "Case & Workflow Management", "description": "Track every case through enquiry, application, compliance, and completion with pre-built workflows for each UK visa type.", "badges": ["FULL LIFECYCLE", "PRE-BUILT WORKFLOWS"], "icon": "Workflow"},
+   {"title": "Document Vault", "description": "Store, organise, and retrieve every case document securely in one place, with checklists showing what\'s received and outstanding.", "badges": ["SECURE STORAGE", "CHECKLIST TRACKING"], "icon": "FileCheck"},
+   {"title": "Caseworker & Task Assignment", "description": "Assign cases and tasks to caseworkers, then monitor workload and progress from a single manager dashboard.", "badges": ["TASK ASSIGNMENT", "WORKLOAD VISIBILITY"], "icon": "Users"},
+   {"title": "Compliance & Licence Tracking", "description": "Manage licence requests, CoS allocation, and compliance reviews with automatic alerts before deadlines are at risk.", "badges": ["LICENCE TRACKING", "AUTO ALERTS"], "icon": "Shield"},
+   {"title": "Client Self-Service Portal", "description": "Let individual clients track their application progress, upload documents, and message your team without needing to call or email.", "badges": ["CLIENT PORTAL", "SELF-SERVICE"], "icon": "UserCheck"},
+   {"title": "Business/Sponsor Portal", "description": "Give sponsoring businesses live visibility into licence status, sponsored workers, compliance obligations, and upcoming renewal deadlines.", "badges": ["SPONSOR PORTAL", "LIVE COMPLIANCE"], "icon": "Building2"}
  ]', 4)
 ON CONFLICT (section_key) DO NOTHING;
 
@@ -67,11 +65,11 @@ ON CONFLICT (section_key) DO NOTHING;
 -- ============================================================
 INSERT INTO home_content (section_key, title, content, display_order) VALUES
 ('core_modules', 'Core Modules',
- '[
-   {"title": "Admin Dashboard", "description": "Firm-wide visibility, billing oversight, and compliance reporting.", "link": "/features/admin", "color": "blue"},
-   {"title": "Caseworker Portal", "description": "Matter management, document automation, and deadline tracking.", "link": "/features/caseworker", "color": "indigo"},
-   {"title": "Candidate Portal", "description": "Real-time case tracking, document uploads, and direct messaging.", "link": "/features/candidate", "color": "emerald"},
-   {"title": "Client Portal", "description": "Multi-candidate dashboards, compliance tracking, and reporting.", "link": "/features/client", "color": "purple"}
+  '[
+   {"title": "Admin Dashboard", "description": "Complete oversight of every case, caseworker, and compliance obligation across your consultancy.", "link": "/features/admin", "color": "indigo"},
+   {"title": "Caseworker Portal", "description": "Every assigned case, task, and deadline in one place — from Skilled Worker to ILR and Citizenship work.", "link": "/features/caseworker", "color": "emerald"},
+   {"title": "Client Portal", "description": "Self-service tracking, document upload, and direct messaging for individual applicants.", "link": "/features/candidate", "color": "blue"},
+   {"title": "Business/Sponsor Portal", "description": "Live visibility into sponsor licence status, sponsored workers, and CoS allocation.", "link": "/features/client", "color": "purple"}
  ]', 5)
 ON CONFLICT (section_key) DO NOTHING;
 
