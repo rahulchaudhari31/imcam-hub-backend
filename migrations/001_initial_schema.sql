@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS demo_requests (
     email       TEXT NOT NULL,
     phone       TEXT,
     firm_size   firm_size_enum NOT NULL,
+    preferred_date DATE,
+    preferred_time TIME,
     message     TEXT,
     status      demo_status_enum NOT NULL DEFAULT 'new',
     created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()

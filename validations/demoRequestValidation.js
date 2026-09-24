@@ -20,6 +20,14 @@ export const createDemoRequestValidation = [
     .isLength({ max: 30 }).withMessage('Phone must be 30 characters or fewer.'),
   body('firmSize')
     .isIn(['1-10', '11-50', '51-200', '201-1000', '1000+']).withMessage('Invalid firm size.'),
+  body('preferredDate')
+    .optional({ values: 'falsy' })
+    .trim()
+    .isISO8601().withMessage('Preferred date must be a valid date.'),
+  body('preferredTime')
+    .optional({ values: 'falsy' })
+    .trim()
+    .matches(/^([01]\d|2[0-3]):[0-5]\d$/).withMessage('Preferred time must be a valid time (HH:MM).'),
   body('message')
     .notEmpty().withMessage('Message is required.')
     .trim()

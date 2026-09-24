@@ -38,11 +38,12 @@ ON CONFLICT (section_key) DO NOTHING;
 INSERT INTO home_content (section_key, title, content, display_order) VALUES
 ('trusted_features', 'Trusted Features',
   '[
-   {"title": "Role-Based Access", "description": "Every user sees only the cases and data relevant to their role."},
-   {"title": "Real-Time Visibility", "description": "Live dashboards track every case, deadline, and caseworker''s progress instantly."},
-   {"title": "Four Connected Portals", "description": "Admin, caseworker, client, and business, all sharing one live case."},
-   {"title": "AI-Powered Case Intelligence", "description": "Auto-checks documents, flags compliance risks, and predicts delays early."}
- ]', 3)
+   {"title": "Role-Based Access", "description": "Secure by design. Every user sees only the cases and data their role needs \u2014 nothing more, nothing less."},
+   {"title": "Real-Time Visibility", "description": "Always know where everything stands. Live dashboards track every case, deadline, and workload the moment it changes."},
+   {"title": "Four Connected Portals", "description": "Admin, caseworker, client, and business \u2014 one shared case, zero duplication, fully in sync."},
+{"title": "AI-Powered Case Intelligence", "description": "AI watches the details so your team can focus on the case \u2014 flagging risks and predicting delays before they happen."},
+   {"title": "Audit & Compliance for Your Regulator", "description": "Every case keeps a complete, exportable trail \u2014 records, logs, and checks ready for your regulator (OISC) at any time, without last-minute file hunts."}
+  ]', 3)
 ON CONFLICT (section_key) DO NOTHING;
 
 -- ============================================================
@@ -68,7 +69,7 @@ INSERT INTO home_content (section_key, title, content, display_order) VALUES
   '[
    {"title": "Admin Dashboard", "description": "Complete oversight of every case, caseworker, and compliance obligation across your consultancy.", "link": "/features/admin", "color": "indigo"},
    {"title": "Caseworker Portal", "description": "Every assigned case, task, and deadline in one place — from Skilled Worker to ILR and Citizenship work.", "link": "/features/caseworker", "color": "emerald"},
-   {"title": "Client Portal", "description": "Self-service tracking, document upload, and direct messaging for individual applicants.", "link": "/features/candidate", "color": "blue"},
+   {"title": "Candidate Portal", "description": "Self-service tracking, document upload, and direct messaging for individual applicants.", "link": "/features/candidate", "color": "blue"},
    {"title": "Business/Sponsor Portal", "description": "Live visibility into sponsor licence status, sponsored workers, and CoS allocation.", "link": "/features/client", "color": "purple"}
  ]', 5)
 ON CONFLICT (section_key) DO NOTHING;
@@ -93,7 +94,7 @@ INSERT INTO home_content (section_key, title, content, display_order) VALUES
  '[
    {"question": "What types of immigration cases does ImCam Hub support?", "answer": "ImCam Hub supports all major immigration case types including work permits, permanent residency applications, LMIA, Express Entry, Provincial Nominee Programs, study permits, and visitor visas."},
    {"question": "How does document verification work?", "answer": "Our AI-powered OCR scans uploaded documents, extracts key data, verifies authenticity markers, and flags any inconsistencies for caseworker review."},
-   {"question": "Can candidates track their own case progress?", "answer": "Yes! The Candidate Portal provides real-time case status tracking, document upload capabilities, deadline notifications, and direct messaging with caseworkers."},
+   {"question": "Can clients track their own case progress?", "answer": "Yes! The Candidate Portal provides real-time case status tracking, document upload capabilities, deadline notifications, and direct messaging with caseworkers."},
    {"question": "Is ImCam Hub compliant with privacy regulations?", "answer": "Absolutely. ImCam Hub is built with PIPEDA, GDPR, and IRCC data handling requirements in mind. All data is encrypted at rest and in transit."},
    {"question": "What integrations does ImCam Hub offer?", "answer": "We integrate with common tools including email platforms, calendar apps, document management systems, and government portals where APIs are available."},
    {"question": "How long does implementation take?", "answer": "Most firms are fully onboarded within 2-4 weeks, depending on firm size and data migration requirements. Our onboarding team provides dedicated support throughout."}
@@ -128,7 +129,7 @@ ON CONFLICT DO NOTHING;
 INSERT INTO faqs (question, answer, display_order) VALUES
 ('What types of immigration cases does ImCam Hub support?', 'ImCam Hub supports all major immigration case types including work permits, permanent residency applications, LMIA, Express Entry, Provincial Nominee Programs, study permits, and visitor visas.', 1),
 ('How does document verification work?', 'Our AI-powered OCR scans uploaded documents, extracts key data, verifies authenticity markers, and flags any inconsistencies for caseworker review.', 2),
-('Can candidates track their own case progress?', 'Yes! The Candidate Portal provides real-time case status tracking, document upload capabilities, deadline notifications, and direct messaging with caseworkers.', 3),
+('Can clients track their own case progress?', 'Yes! The Candidate Portal provides real-time case status tracking, document upload capabilities, deadline notifications, and direct messaging with caseworkers.', 3),
 ('Is ImCam Hub compliant with privacy regulations?', 'Absolutely. ImCam Hub is built with PIPEDA, GDPR, and IRCC data handling requirements in mind. All data is encrypted at rest and in transit.', 4),
 ('What integrations does ImCam Hub offer?', 'We integrate with common tools including email platforms, calendar apps, document management systems, and government portals where APIs are available.', 5),
 ('How long does implementation take?', 'Most firms are fully onboarded within 2-4 weeks, depending on firm size and data migration requirements. Our onboarding team provides dedicated support throughout.', 6)
@@ -138,7 +139,7 @@ ON CONFLICT DO NOTHING;
 -- Testimonials
 -- ============================================================
 INSERT INTO testimonials (full_name, company, role, testimonial, rating) VALUES
-('Sarah Mitchell', 'Maple Leaf Immigration Law', 'Managing Partner', 'ImCam Hub has transformed how our firm handles cases. We have reduced processing time by 40% and our clients love the transparency of the candidate portal.', 5),
+('Sarah Mitchell', 'Maple Leaf Immigration Law', 'Managing Partner', 'ImCam Hub has transformed how our firm handles cases. We have reduced processing time by 40% and our clients love the transparency of the client portal.', 5),
 ('David Chen', 'NorthStar Immigration Group', 'Senior Caseworker', 'The document verification AI alone saves us hours every week. Combined with the deadline tracking, it is an indispensable tool for our practice.', 5),
 ('Priya Sharma', 'CanFlow Consulting', 'Operations Director', 'Switching to ImCam Hub was the best decision we made. Our team is more productive and our clients are happier than ever.', 5)
 ON CONFLICT DO NOTHING;
@@ -147,8 +148,8 @@ ON CONFLICT DO NOTHING;
 -- Contact Information
 -- ============================================================
 INSERT INTO contact_information (email, phone, address, business_hours, content) VALUES
-('hello@incamhub.com', '1-800-555-1234', '123 Bay Street Suite 400 Toronto ON M5J 2R2 Canada', 'Monday - Friday: 9:00 AM - 6:00 PM EST',
- '{"support_email": "support@incamhub.com", "sales_email": "sales@incamhub.com"}')
+('srishti@e2eworld.co.uk', '+44 (0) 121 778 2400', 'Unit 2, 1204B Stratford Road, Hall Green, Birmingham. B28 8HN, England', 'Monday - Friday: 9:00 AM - 6:00 PM',
+ '{"website": "https://e2ecybersolutions.com/", "mobile": "+44 (0) 7570 380787"}')
 ON CONFLICT DO NOTHING;
 
 -- ============================================================

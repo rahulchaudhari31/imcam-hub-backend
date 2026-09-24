@@ -11,7 +11,7 @@ SELECT v.title, v.description, v.icon, v.ord, TRUE
 FROM (VALUES
   ('Document Vault', 'Securely store, organise, and retrieve every case document in one centralised repository — a core part of ImCam Hub''s UK immigration case management software.', 'Database', 1),
   ('Case Pipeline View', 'A visual pipeline showing every case''s stage across your caseload, giving immigration practice management software the visibility to spot bottlenecks instantly.', 'LayoutDashboard', 2),
-  ('Client Portal', 'Give individual clients an immigration client portal software experience to track application progress, upload documents, and message their caseworker — reducing back-and-forth.', 'MessageSquare', 3),
+  ('Candidate Portal', 'Give individual clients an immigration candidate portal software experience to track application progress, upload documents, and message their caseworker — reducing back-and-forth.', 'MessageSquare', 3),
   ('Business/Sponsor Portal', 'Sponsor licence management software built for businesses, giving live visibility into licence status, sponsored workers, and CoS allocation without manual chasing.', 'Building2', 4),
   ('Reporting & Analytics', 'Real-time dashboards on caseload, revenue, and team performance, turning your visa case tracking system into a source of actionable insight.', 'PieChart', 5),
   ('Caseworker & Task Assignment', 'Assign cases and tasks to caseworkers and monitor workload from one dashboard — immigration software built for how consultancy teams actually work.', 'Users', 6),
@@ -41,7 +41,7 @@ WHERE page_key = 'global' AND display_order = 2;
 
 UPDATE faqs SET page_key = 'global',
   question = 'Can clients and sponsoring businesses track their own case progress?',
-  answer = 'Yes. Individual clients track their application through the Client Portal, while sponsoring businesses see licence status, sponsored workers, and CoS allocation in the Business Portal — both updated in real time, with direct messaging to their caseworker.',
+  answer = 'Yes. Individual clients track their application through the Candidate Portal, while sponsoring businesses see licence status, sponsored workers, and CoS allocation in the Business Portal — both updated in real time, with direct messaging to their caseworker.',
   is_active = TRUE
 WHERE page_key = 'global' AND display_order = 3;
 
@@ -69,7 +69,7 @@ SELECT v.question, v.answer, 'global', v.ord, TRUE
 FROM (VALUES
   ('What types of immigration cases does ImCam Hub support?', 'ImCam Hub is built specifically for UK immigration work — Skilled Worker visas, Sponsor Licence applications and renewals, ILR, and British Citizenship. Each case type comes with pre-built workflows, document checklists, and compliance rules aligned to UKVI requirements.', 1),
   ('How does the document verification work?', 'Our AI reviews uploaded documents in real time — checking for missing pages, expired dates, and incomplete fields — and flags issues before a caseworker even opens the file. This reduces rejection rates and keeps UK visa applications moving.', 2),
-  ('Can clients and sponsoring businesses track their own case progress?', 'Yes. Individual clients track their application through the Client Portal, while sponsoring businesses see licence status, sponsored workers, and CoS allocation in the Business Portal — both updated in real time, with direct messaging to their caseworker.', 3),
+  <br>  ('Can clients and sponsoring businesses track their own case progress?', 'Yes. Individual clients track their application through the Candidate Portal, while sponsoring businesses see licence status, sponsored workers, and CoS allocation in the Business Portal — both updated in real time, with direct messaging to their caseworker.', 3),
   ('Is ImCam Hub compliant with data privacy regulations?', 'ImCam Hub is built with compliance at its core. We are fully GDPR compliant, with all data encrypted at rest and in transit, full audit logging, and role-based access controls — supporting the record-keeping standards expected for sponsor licence compliance and UKVI audits.', 4),
   ('What integrations does ImCam Hub offer?', 'ImCam Hub connects with popular accounting tools (Xero, QuickBooks), email and calendar platforms, and communication tools like Microsoft Teams and Slack. Our API also allows custom integrations with your existing systems.', 5),
   ('How long does implementation typically take?', 'Most consultancies are fully onboarded within 2-4 weeks. This includes data migration from your existing systems, workflow configuration, team training, and a parallel-run period. Dedicated onboarding managers ensure a smooth transition with minimal disruption.', 6)
@@ -113,7 +113,7 @@ WHERE NOT EXISTS (SELECT 1 FROM faqs f WHERE f.page_key = 'caseworker' AND f.que
 INSERT INTO faqs (question, answer, page_key, display_order, is_active)
 SELECT v.question, v.answer, 'candidate', v.ord, TRUE
 FROM (VALUES
-  ('Is the client portal mobile-friendly?', 'Yes. The Client Portal is fully responsive and works on any device — phone, tablet, or desktop. You can upload documents, check your case status, and message your caseworker from anywhere.', 1),
+  ('Is the candidate portal mobile-friendly?', 'Yes. The Candidate Portal is fully responsive and works on any device — phone, tablet, or desktop. You can upload documents, check your case status, and message your caseworker from anywhere.', 1),
   ('Can other applicants see my information?', 'No. Each client only sees their own case data. The portal is fully isolated — there is no way for one applicant to access another''s information, documents, or communications.', 2),
   ('How do the AI document checks work?', 'When you upload a document, AI reviews it for missing pages or expired dates and flags any issues immediately — so you can fix them before they delay your case.', 3)
 ) AS v(question, answer, ord)
@@ -173,11 +173,11 @@ SELECT 'candidate', 'Individual Applicant', 'Built for Applicants',
   'bg-navy', TRUE,
   'One Portal to Track Your Entire Visa Application',
   $j$[
-    "The Client Portal gives individual applicants a clear, live view of their UK visa case — whether it's a Skilled Worker visa, ILR, or British Citizenship application — without needing to call or email for updates.",
+    "The Candidate Portal gives individual applicants a clear, live view of their UK visa case — whether it's a Skilled Worker visa, ILR, or British Citizenship application — without needing to call or email for updates.",
     "See exactly which stage your case is at, what's needed from you, and what your caseworker is handling next. Built as part of ImCam Hub's UK immigration case management software, it replaces uncertainty and status-check emails with straightforward, real-time visibility."
   ]$j$::jsonb,
-  FALSE, 'Client Portal Preview',
-  'See this in action', 'Book a personalized walkthrough of the Client Portal and discover how it fits your workflow.', 'Book a Free Demo', '/book-demo'
+  FALSE, 'Candidate Portal Preview',
+  'See this in action', 'Book a personalized walkthrough of the Candidate Portal and discover how it fits your workflow.', 'Book a Free Demo', '/book-demo'
 WHERE NOT EXISTS (SELECT 1 FROM feature_pages p WHERE p.page_key = 'candidate');
 
 INSERT INTO feature_pages
@@ -239,8 +239,8 @@ INSERT INTO pricing_plans
   (name, monthly_price, annual_price, description, cta_text, cta_class, popular, check_color, display_order, is_active)
 SELECT v.name, v.monthly_price, v.annual_price, v.description, v.cta_text, v.cta_class, v.popular, 'text-blue', v.ord, TRUE
 FROM (VALUES
-  ('Starter', 49, 39, 'Perfect for small agencies', 'Start Free Trial', 'border-2 border-navy text-navy hover:bg-navy hover:text-white', FALSE, 1),
-  ('Professional', 69, 55, 'For growing businesses', 'Book a Demo', 'btn-gradient-primary', TRUE, 2),
+  ('Starter', 49, 39, 'Customised', 'Start Free Trial', 'border-2 border-navy text-navy hover:bg-navy hover:text-white', FALSE, 1),
+  ('Professional', 69, 55, 'For big companies', 'Book a Demo', 'btn-gradient-primary', TRUE, 2),
   ('Enterprise', 249, 199, 'Full power for large organisations', 'Contact Sales', 'border-2 border-navy text-navy hover:bg-navy hover:text-white', FALSE, 3)
 ) AS v(name, monthly_price, annual_price, description, cta_text, cta_class, popular, ord)
 WHERE NOT EXISTS (SELECT 1 FROM pricing_plans p WHERE p.name = v.name);
@@ -250,20 +250,20 @@ INSERT INTO pricing_features (pricing_plan_id, feature, display_order)
 SELECT pl.id, v.feature, v.ord
 FROM pricing_plans pl
 JOIN (VALUES
-  ('Starter', 'Dashboard', 1), ('Starter', 'Cases', 2), ('Starter', 'Candidates', 3), ('Starter', 'Caseworkers', 4), ('Starter', 'Businesses', 5),
+  ('Starter', 'Dashboard', 1), ('Starter', 'Cases', 2), ('Starter', 'Clients', 3), ('Starter', 'Caseworkers', 4), ('Starter', 'Businesses', 5),
   ('Starter', 'Finance', 6), ('Starter', 'Reports', 7), ('Starter', 'Pipeline', 8), ('Starter', 'Documents', 9), ('Starter', 'Calendar', 10),
   ('Starter', 'Messages', 11), ('Starter', 'Permissions', 12), ('Starter', 'Settings', 13), ('Starter', 'Licence Requests', 14), ('Starter', 'Enquiries', 15),
   ('Starter', 'Tasks', 16), ('Starter', 'Clients', 17), ('Starter', 'Licence Reviews', 18), ('Starter', 'Application', 19), ('Starter', 'Payments', 20),
   ('Starter', 'Appointments', 21), ('Starter', 'Application Status', 22), ('Starter', 'My Account', 23), ('Starter', 'Profile', 24), ('Starter', 'Licence', 25),
   ('Starter', 'Compliance', 26), ('Starter', 'Workers', 27), ('Starter', 'Payment', 28), ('Starter', 'Reporting Obligations', 29),
-  ('Professional', 'Dashboard', 1), ('Professional', 'Cases', 2), ('Professional', 'Candidates', 3), ('Professional', 'Caseworkers', 4), ('Professional', 'Businesses', 5),
+  ('Professional', 'Dashboard', 1), ('Professional', 'Cases', 2), ('Professional', 'Clients', 3), ('Professional', 'Caseworkers', 4), ('Professional', 'Businesses', 5),
   ('Professional', 'Finance', 6), ('Professional', 'Reports', 7), ('Professional', 'Pipeline', 8), ('Professional', 'Workload', 9), ('Professional', 'Documents', 10),
   ('Professional', 'Calendar', 11), ('Professional', 'Messages', 12), ('Professional', 'Escalations', 13), ('Professional', 'Audit Logs', 14), ('Professional', 'Permissions', 15),
   ('Professional', 'Settings', 16), ('Professional', 'Licence Requests', 17), ('Professional', 'Enquiries', 18), ('Professional', 'Assign', 19), ('Professional', 'Departments', 20),
   ('Professional', 'Tasks', 21), ('Professional', 'Clients', 22), ('Professional', 'Performance', 23), ('Professional', 'Licence Reviews', 24), ('Professional', 'Application', 25),
   ('Professional', 'Payments', 26), ('Professional', 'Appointments', 27), ('Professional', 'Application Status', 28), ('Professional', 'My Account', 29), ('Professional', 'Profile', 30),
   ('Professional', 'Licence', 31), ('Professional', 'Compliance', 32), ('Professional', 'Workers', 33), ('Professional', 'Payment', 34), ('Professional', 'Reporting Obligations', 35),
-  ('Enterprise', 'Dashboard', 1), ('Enterprise', 'Cases', 2), ('Enterprise', 'Candidates', 3), ('Enterprise', 'Caseworkers', 4), ('Enterprise', 'Businesses', 5),
+  ('Enterprise', 'Dashboard', 1), ('Enterprise', 'Cases', 2), ('Enterprise', 'Clients', 3), ('Enterprise', 'Caseworkers', 4), ('Enterprise', 'Businesses', 5),
   ('Enterprise', 'Finance', 6), ('Enterprise', 'Reports', 7), ('Enterprise', 'Pipeline', 8), ('Enterprise', 'Workload', 9), ('Enterprise', 'Documents', 10),
   ('Enterprise', 'Calendar', 11), ('Enterprise', 'Messages', 12), ('Enterprise', 'Escalations', 13), ('Enterprise', 'Audit Logs', 14), ('Enterprise', 'Permissions', 15),
   ('Enterprise', 'Settings', 16), ('Enterprise', 'Licence Requests', 17), ('Enterprise', 'Enquiries', 18), ('Enterprise', 'Assign', 19), ('Enterprise', 'Departments', 20),
@@ -280,12 +280,12 @@ SELECT v.label, v.standard, v.pro, v.ord
 FROM (VALUES
   ('Active cases', 'Up to 100', 'Unlimited', 1),
   ('Caseworker accounts', '5', 'Unlimited', 2),
-  ('Candidate portal', 'true', 'true', 3),
+  ('Client portal', 'true', 'true', 3),
   ('Client portal', 'true', 'true', 4),
   ('Document checklist automation', 'true', 'true', 5),
   ('Deadline tracking & alerts', 'true', 'true', 6),
   ('Compliance reports', 'Standard', 'Advanced + Custom', 7),
-  ('Smart Chat (candidate-facing)', 'false', 'true', 8),
+  ('Smart Chat (client-facing)', 'false', 'true', 8),
   ('Email drafting', 'false', 'true', 9),
   ('Contract generation', 'false', 'true', 10),
   ('Templates library', 'false', 'true', 11),
@@ -371,7 +371,7 @@ SELECT 'how_it_works', 'How It Works',
   $j$ {
     "steps": [
       { "number": "01", "title": "Register", "description": "Register your consultancy, add your caseworkers, and set up your admin account. Managers get full oversight from day one, with role-based access configured automatically." },
-      { "number": "02", "title": "Onboard Cases & Clients", "description": "Add candidates or sponsoring businesses and start their case journey — Skilled Worker, Sponsor Licence, ILR, or Citizenship — with pre-built workflows ready to go, no manual setup required." },
+      { "number": "02", "title": "Onboard Cases & Clients", "description": "Add clients or sponsoring businesses and start their case journey — Skilled Worker, Sponsor Licence, ILR, or Citizenship — with pre-built workflows ready to go, no manual setup required." },
       { "number": "03", "title": "Manage & Track", "description": "Assign caseworkers, track every case through its stages, and let AI flag missing documents, compliance risks, and delays — while clients and businesses follow their own progress in real time." }
     ]
   } $j$::jsonb, 5, TRUE
@@ -402,7 +402,7 @@ SELECT 'See ImCam Hub in Action',
   ] $j$::jsonb,
   'We went from 3 different tools and endless email chains to one system in under a month. Our caseworkers saved 10+ hours a week within the first quarter.',
   'Sarah Mitchell', 'Managing Partner, Mitchell & Associates',
-  '1-800-555-1234', 'hello@incamhub.com',
+  '+44 20 7946 0958', 'hello@incamhub.com',
   'Ready to see ImCam Hub in action?',
   'Explore how ImCam Hub can transform your immigration practice with a personalized demo.',
   'Book a Free Demo', '/book-demo', NULL
@@ -427,8 +427,8 @@ FROM website_navigation p
 JOIN (VALUES
   ('Admin Dashboard', '/features/admin', 1),
   ('Caseworker Portal', '/features/caseworker', 2),
-  ('Client Portal', '/features/candidate', 3),
-  ('Sponsor Business', '/features/client', 4)
+  ('Candidate Portal', '/features/candidate', 3),
+  ('Sponsor/Business Portal', '/features/client', 4)
 ) AS v(label, url, ord) ON p.label = 'Features' AND p.parent_id IS NULL
 WHERE NOT EXISTS (SELECT 1 FROM website_navigation n WHERE n.label = v.label AND n.parent_id = p.id);
 
@@ -440,14 +440,11 @@ SELECT v.group_key, v.label, v.url, v.ord, TRUE
 FROM (VALUES
   ('product', 'Admin Dashboard', '/features/admin', 1),
   ('product', 'Caseworker Portal', '/features/caseworker', 2),
-  ('product', 'Client Portal', '/features/candidate', 3),
-  ('product', 'Sponsor Business', '/features/client', 4),
-  ('product', 'Integrations', '/resources', 5),
+  ('product', 'Candidate Portal', '/features/candidate', 3),
+  ('product', 'Sponsor/Business Portal', '/features/client', 4),
   ('company', 'About Us', '/resources', 1),
   ('company', 'Solutions', '/solutions', 2),
-  ('company', 'Pricing', '/pricing', 3),
-  ('company', 'Resources', '/resources', 4),
-  ('company', 'Careers', '/resources', 5)
+  ('company', 'Pricing', '/pricing', 3)
 ) AS v(group_key, label, url, ord)
 WHERE NOT EXISTS (SELECT 1 FROM footer_links f WHERE f.group_key = v.group_key AND f.label = v.label);
 

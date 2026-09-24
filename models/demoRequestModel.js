@@ -1,12 +1,12 @@
 import pool from '../config/db.js';
 
 const DemoRequest = {
-  async create({ company, fullName, email, phone, firmSize, message }) {
+  async create({ company, fullName, email, phone, firmSize, preferredDate, preferredTime, message }) {
     const { rows } = await pool.query(
-      `INSERT INTO demo_requests (company, full_name, email, phone, firm_size, message)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id, company, full_name, email, phone, firm_size, message, status, created_at`,
-      [company, fullName, email, phone || null, firmSize, message || null]
+      `INSERT INTO demo_requests (company, full_name, email, phone, firm_size, preferred_date, preferred_time, message)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+       RETURNING id, company, full_name, email, phone, firm_size, preferred_date, preferred_time, message, status, created_at`,
+      [company, fullName, email, phone || null, firmSize, preferredDate || null, preferredTime || null, message || null]
     );
     return rows[0];
   },
@@ -21,7 +21,7 @@ const DemoRequest = {
 
   async findById(id) {
     const { rows } = await pool.query(
-      `SELECT id, company, full_name, email, phone, firm_size, message, status, created_at
+      `SELECT id, company, full_name, email, phone, firm_size, preferred_date, preferred_time, message, status, created_at
        FROM demo_requests WHERE id = $1`,
       [id]
     );
@@ -49,7 +49,7 @@ const DemoRequest = {
 
     params.push(limit, offset);
     const { rows } = await pool.query(
-      `SELECT id, company, full_name, email, phone, firm_size, message, status, created_at
+      `SELECT id, company, full_name, email, phone, firm_size, preferred_date, preferred_time, message, status, created_at
        FROM demo_requests ${where}
        ORDER BY created_at DESC
        LIMIT $${paramIdx++} OFFSET $${paramIdx++}`,
@@ -62,7 +62,7 @@ const DemoRequest = {
   async updateStatus(id, status) {
     const { rows } = await pool.query(
       `UPDATE demo_requests SET status = $2 WHERE id = $1
-       RETURNING id, company, full_name, email, phone, firm_size, message, status, created_at`,
+       RETURNING id, company, full_name, email, phone, firm_size, preferred_date, preferred_time, message, status, created_at`,
       [id, status]
     );
     return rows[0] || null;

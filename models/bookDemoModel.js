@@ -45,7 +45,7 @@ const BookDemoConfig = {
         testimonialQuote || 'We went from 3 different tools and endless email chains to one system in under a month. Our caseworkers saved 10+ hours a week within the first quarter.',
         testimonialAuthor || 'Sarah Mitchell',
         testimonialRole || 'Managing Partner, Mitchell & Associates',
-        contactPhone || '1-800-555-1234',
+        contactPhone || '+44 20 7946 0958',
         contactEmail || 'hello@incamhub.com',
         ctaTitle || 'Ready to see ImCam Hub in action?',
         ctaDescription || 'Explore how ImCam Hub can transform your immigration practice with a personalized demo.',

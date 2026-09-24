@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS book_demo_config (
     testimonial_author      TEXT DEFAULT 'Sarah Mitchell',
     testimonial_role        TEXT DEFAULT 'Managing Partner, Mitchell & Associates',
     -- Contact fallback
-    contact_phone           TEXT DEFAULT '1-800-555-1234',
+    contact_phone           TEXT DEFAULT '+44 20 7946 0958',
     contact_email           TEXT DEFAULT 'hello@incamhub.com',
     -- CTA
     cta_title               TEXT DEFAULT 'Ready to see ImCam Hub in action?',

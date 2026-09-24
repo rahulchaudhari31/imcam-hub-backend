@@ -9,7 +9,7 @@ export const createDemoRequest = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: errors.array()[0].msg });
   }
 
-  const { company, fullName, email, phone, firmSize, message } = req.body;
+  const { company, fullName, email, phone, firmSize, preferredDate, preferredTime, message } = req.body;
 
   const existing = await DemoRequest.findByEmail(email);
   if (existing) {
@@ -22,6 +22,8 @@ export const createDemoRequest = asyncHandler(async (req, res) => {
     email,
     phone,
     firmSize,
+    preferredDate,
+    preferredTime,
     message,
   });
 
